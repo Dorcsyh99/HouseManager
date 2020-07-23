@@ -1,0 +1,42 @@
+<h2>Lessen bele kínálatunkba!</h2>
+<hr class="main-hr">
+<h4 class="sub-heading">Budapesti ingatlanok</h4>
+<div class="container" *ngFor="let prop of props">
+  <div class="card-tile" *ngIf="prop.city == 'Budapest'">
+      <h4>{{prop.address}}</h4>
+      <img [src]="stockImage">
+      <p class="price-block">
+        <span>Ár:</span>
+        <span>{{prop.price | currency:'HUF'}}</span>
+      </p>
+      <div class="spec-block">
+        <p>Méret: {{prop.size}} négyzetméter</p>
+        <p>Szobák száma: {{prop.numberOfRooms}}</p>
+        <p>Építés éve: {{prop.year}}</p>
+      </div>
+      <hr>
+      <p>{{prop.description}}</p>
+      <hr>
+      <button mat-button>Megnézem</button>
+    </div>
+</div>
+<h4 class="sub-heading">Vidéki ingatlanok</h4>
+<div class="container" *ngFor="let prop of props">
+  <div class="card-tile" *ngIf="prop.city != 'Budapest'">
+      <h4>{{prop.address}}</h4>
+      <img [src]="stockImage">
+      <p class="price-block">
+        <span>Ár:</span>
+        <span>{{prop.price | currency:'HUF'}}</span>
+      </p>
+      <div class="spec-block">
+        <p>Méret: {{prop.size}} négyzetméter</p>
+        <p>Szobák száma: {{prop.numberOfRooms}}</p>
+        <p>Építés éve: {{prop.year}}</p>
+      </div>
+      <hr>
+      <p>{{prop.description}}</p>
+      <hr>
+      <button mat-button>Megnézem</button>
+    </div>
+</div>

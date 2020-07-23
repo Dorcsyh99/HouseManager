@@ -1,0 +1,105 @@
+<mat-card>
+  <form [formGroup]="form" (submit)="onSaveProperty()" *ngIf="!isLoading">
+      <h3>Az alábbi mezők kitöltése kötelező</h3>
+      <mat-form-field appearance="outline">
+        <mat-label>Város</mat-label>
+        <input matInput type="text" class="regular-input" formControlName="city">
+        <mat-error *ngIf="form.get('city').invalid">Kérjük, írjon be várost.</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Kerület</mat-label>
+        <input matInput type="text" class="regular-input" formControlName="city2">
+      </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Az ingatlan címe</mat-label>
+      <input matInput type="text" class="regular-input" formControlName="address">
+      <mat-error *ngIf="form.get('address').invalid">Kérjük, írjon be címet.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Az ingatlan állapota</mat-label>
+      <mat-select matInput required>
+        <mat-option value="Új építésű">Újszerű</mat-option>
+        <mat-option value="Újszerű">Újszerű</mat-option>
+        <mat-option value="Felújított">Felújított</mat-option>
+        <mat-option value="Felújítandó">Felújítandó</mat-option>
+        <mat-option value="Befejezetlen">Befejezetlen</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Irányár</mat-label>
+      <input matInput type="number" class="regular-input" formControlName="price">
+      <mat-error *ngIf="form.get('price').invalid">Kérjük, írjon be egy irányárat</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Az ingatlan építésének éve</mat-label>
+      <input matInput type="number" class="regular-input" formControlName="year" min="1900" max="2020">
+      <mat-error *ngIf="form.get('year').invalid">Kérjük, írja be az évet</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ingatlan mérete</mat-label>
+      <input matInput type="number" formControlName="size" min="10">
+      <mat-error *ngIf="form.get('size').invalid">Kérjük, adjon meg a méretet.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Parkolás</mat-label>
+      <mat-select matInput required>
+        <mat-option value="Udvari beálló">Udvari beálló</mat-option>
+        <mat-option value="Garázs">Garázs</mat-option>
+        <mat-option value="Utca, közterület">Utca, közterület</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Szobák száma</mat-label>
+      <input matInput type="number" class="regular-input" formControlName="numberOfRooms" min=1>
+      <mat-error *ngIf="form.get('numberOfRooms').invalid">Kérjük, adjon meg a szobaszámot.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Emelet</mat-label>
+      <input matInput type="number" class="regular-input" formControlName="level" min=1>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fűtés típusa</mat-label>
+      <mat-select matInput required>
+        <mat-option value="Gáz (cirko)">Gáz (cirko)</mat-option>
+        <mat-option value="Gáz (konvektor)">Gáz (konvektor)</mat-option>
+        <mat-option value="Házközponti">Házközponti</mat-option>
+        <mat-option value="Házközponti, egyedi méréssel">Házközponti, egyedi méréssel</mat-option>
+        <mat-option value="Távfűtés">Távfűtés</mat-option>
+        <mat-option value="Elektromos">Elektromos</mat-option>
+        <mat-option value="Falfűtés">Falfűtés</mat-option>
+        <mat-option value="Padlófűtés">Padlófűtés</mat-option>
+        <mat-option value="Kazán">Kazán</mat-option>
+        <mat-option value="Cserépkályha">Cserépkályha</mat-option>
+        <mat-option value="Egyéb">Egyéb</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="radio-container">
+    <mat-radio-group formControlName="elevator">
+      <mat-label>Lift</mat-label>
+      <mat-radio-button matInput value=1>Igen</mat-radio-button>
+      <mat-radio-button matInput value=0>Nem</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="radio-container">
+    <mat-radio-group formControlName="garden">
+      <mat-label>Kert</mat-label>
+      <mat-radio-button matInput value=1>Igen</mat-radio-button>
+      <mat-radio-button matInput value=0>Nem</mat-radio-button>
+    </mat-radio-group>
+  </div>
+    <div class="radio-container">
+    <mat-radio-group formControlName="attic">
+      <mat-label>Erkély</mat-label>
+      <mat-radio-button matInput value=1>Igen</mat-radio-button>
+      <mat-radio-button matInput value=0>Nem</mat-radio-button>
+    </mat-radio-group>
+    </div>
+    <div class="radio-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Leírás</mat-label>
+      <input matInput type="textarea" class="long-input" formControlName="description">
+    </mat-form-field>
+    </div>
+    <button mat-raised-button color="accent" type="submit">Ingatlan feltöltése</button>
+  </form>
+</mat-card>

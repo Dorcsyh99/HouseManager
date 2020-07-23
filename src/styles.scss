@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face{
+  font-family: 'Nunito';
+  src: url("assets/fonts/Nunito-Regular.ttf") format('opentype');
+  font-weight: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+};
+html, body { height: 100%; }
+* { margin: 0; font-family: 'Nunito', sans-serif; font-weight: 300;}
+
+
+app-navbar{
+  margin-bottom: -100px;
+}
+
+routing-outlet{
+  margin-top: 200px;
+}
+.mat-horizontal-stepper-header-container{
+  display: none !important;
+}
+

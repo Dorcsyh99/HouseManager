@@ -1,0 +1,61 @@
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+nav{
+  background-color:#eee;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 100%;
+  color: #333;
+  padding: .5rem 0;
+  .logo{
+    flex-grow: 2;
+    img{
+      width: 100px;
+      padding: 10px 15px;
+    }
+  }
+  .buttons{
+    float: left;
+    flex-grow: 7;
+    padding-top: 20px;
+    .non-img-a{
+      padding: 1rem 2rem 1.2rem 2rem;
+      margin-top: -30px;
+      margin-left: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 5rem;
+      transition: .5s all ease;
+      &:hover{
+        background: rgb(48, 119, 58);
+        border: none;
+        border-radius: 5rem;
+        color: white;
+      }
+    }
+  }
+  .account{
+    flex-grow: 1;
+    float: right;
+    padding-top: 10px;
+    cursor: pointer;
+    button{
+      border-radius: 10rem;
+      background-color: rgb(48, 119, 58);
+      color: white;
+      border: none;
+      font-size: 15px;
+      padding: .9rem .7rem 1rem .7rem;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: .5s all ease;
+      &:hover{
+        background: rgb(39, 139, 53);
+      }
+    }
+  }
+}

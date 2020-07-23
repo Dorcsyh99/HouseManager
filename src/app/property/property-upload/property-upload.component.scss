@@ -1,0 +1,19 @@
+form{
+  padding: auto;
+}
+mat-form-field{
+  margin: 10px;
+  width: 80%;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+.radio-container{
+  display: block;
+}
+
+.long-input{
+  height: 100px;
+}

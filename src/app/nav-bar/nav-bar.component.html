@@ -1,0 +1,26 @@
+<nav>
+  <a class="logo" routerLink="/">
+    <img class="logo-img" src="../assets/images/logo.png">
+  </a>
+  <div class="buttons">
+    <a class="non-img-a" routerLink="properties">
+      Ingatlanok
+    </a>
+    <a *ngIf="userIsAuthenticated" routerLink="/" class="non-img-a">
+      Fórum
+    </a>
+    <a routerLink="/" class="non-img-a">
+      Szakemberek
+    </a>
+    <a routerLink="upload" class="non-img-a" *ngIf="userIsAuthenticated">
+      Ingatlan feltöltése
+    </a>
+  </div>
+  <div class="account">
+    <button *ngIf="!userIsAuthenticated" routerLink="login">Bejelentkezés</button>
+    <button *ngIf="!userIsAuthenticated" routerLink="signup">Regisztráció</button>
+    <button *ngIf="userIsAuthenticated" routerLink="homepage">Profilom</button>
+    <button *ngIf="userIsAuthenticated" (click)="onLogout()">Kijelentkezés</button>
+  </div>
+</nav>
+

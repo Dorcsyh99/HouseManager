@@ -1,0 +1,59 @@
+h2{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 60px 0;
+}
+hr{
+  margin-left: 50%;
+  margin-bottom: 50px;
+  transform: translate(-50%,0);
+  width: 15%;
+  height: 3px;
+  background-color: #333;
+  border: none;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+mat-form-field{
+  margin-left: 50%;
+  transform: translate(-50%,0);
+  max-width: 65%;
+}
+
+button{
+  width: 20%;
+  margin-left: 50%;
+  transform: translate(-50%,0);
+  background-color: rgb(48, 119, 58);
+  color: white;
+  margin-top: 20px;
+}
+
+.success-h1{
+  text-align: center;
+  margin: 20px 0 50px 0;
+  font-size: 46px;
+  font-weight: 700;
+}
+
+.success-btn{
+  text-decoration: none;
+  color: rgb(48, 119, 58);
+  padding: 10px 15px 15px 15px;
+  border-radius: 10px;
+  font-size: 20px;
+  border: .5px solid rgb(48, 119, 58);
+  background: white;
+  transition: .2s all ease-out;
+  margin-left: 50%;
+  transform: translate(-50%,0);
+  &:hover{
+    color: white;
+    border-color: white;
+    background: rgb(48, 119, 58);
+  }
+}

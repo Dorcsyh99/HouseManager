@@ -1,0 +1,33 @@
+h2{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 60px 0;
+}
+hr{
+  margin-left: 50%;
+  margin-bottom: 50px;
+  transform: translate(-50%,0);
+  width: 15%;
+  height: 3px;
+  background-color: #333;
+  border: none;
+}
+form{
+  display: flex;
+  flex-direction: column;
+}
+mat-form-field{
+  margin-left: 50%;
+  transform: translate(-50%,0);
+  max-width: 65%;
+}
+
+button{
+  width: 20%;
+  margin-left: 50%;
+  transform: translate(-50%,0);
+  background-color: rgb(48, 119, 58);
+  color: white;
+  margin-top: 20px;
+}

@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Nunito', sans-serif;
+  src: url('../assets/fonts/Nunito-Regular.ttf') format('opentype');
+  font-weight: 400;
+}
+mat-toolbar{
+  font-family: 'Nunito', sans-serif;
+}
+
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.danger{
+  background-color: red;
+  color: white;
+  &:hover{
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+
+
+.login-dialog{
+  h2{
+    margin: .5rem 0 2rem 0;
+    text-align: center;
+  }
+  form{
+    mat-form-field{
+      min-width: 100%;
+      font-size: 16px;
+      margin: 1px 0;
+    }
+    .mat-button{
+      font-size: 16px;
+      margin-left: 50%;
+      margin-bottom: 10px;
+      transform: translate(-50%,0);
+      &:hover{
+        background-color: rgb(39, 139, 53);
+        color: #fff;
+      }
+    }
+  }
+  mat-divider{
+    margin-bottom: 10px;
+  }
+  span{
+    font-size: 15px;
+  }
+  .link-button{
+    border: none;
+    background: none;
+    font-size: 15px;
+    color: rgb(39, 139, 53);
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover, &:focus, &:active{
+      border: none;
+      background: none;
+    }
+  }
+}
