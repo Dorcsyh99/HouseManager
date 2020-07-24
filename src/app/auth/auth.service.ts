@@ -14,7 +14,7 @@ export class AuthService {
   private tokenTimer: any;
   private userId: string;
   private userName: string;
-  public userData: LoggedInUser;
+  private userData: LoggedInUser;
 
   constructor(private http: HttpClient, private router: Router){}
 
@@ -63,24 +63,30 @@ export class AuthService {
           this.isAuthenticated = true;
           this.userId = response.userId;
           this.userName = response.userName;
-          console.log(this.userName);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           this.saveAuthData(token, expirationDate, this.userId, this.userName);
           this.router.navigate([`homepage`]);
-          console.log(loginData);
         }
       });
   }
 
   getUser(id: string){
-    this.http.get<{user: LoggedInUser}>("http://localhost:3000/api/user/" + id)
-    .subscribe(response => {
-      this.userData = response.user;
-      console.log(this.userData);
-    });
-
+    return this.http.get<{
+      email: string,
+      phone: number,
+      firstName: string,
+      lastName: string,
+      image: string,
+      role: string,
+      uploadedProperties: number,
+      registrationDate: Date,
+      password: string,
+      jobTitle: string
+    }>("http://localhost:3000/api/user/" + id);
   }
+
+
 
 
   autoAuthUser(){
