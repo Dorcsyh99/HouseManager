@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Property } from "../property.model";
 import { PropertyService } from "../property.service";
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-featured-properties',
@@ -20,7 +21,7 @@ export class FeaturedPropertiesComponent implements OnInit {
   public propsSub: Subscription;
 
 
-  constructor(public propertyService: PropertyService) { }
+  constructor(public propertyService: PropertyService, private router: Router) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -32,6 +33,10 @@ export class FeaturedPropertiesComponent implements OnInit {
         this.totalProps = propData.propCount;
         this.props = propData.props;
       });
+    }
+
+    openProp(id: number){
+      this.router.navigate(['/property', id]);
     }
   }
 

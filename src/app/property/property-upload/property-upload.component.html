@@ -99,6 +99,13 @@
       <mat-label>Leírás</mat-label>
       <input matInput type="textarea" class="long-input" formControlName="description">
     </mat-form-field>
+    <div>
+      <button mat-button (click)="filePicker.click()" type="button">Képek feltöltése</button>
+      <input  #filePicker class="hidden" type="file" (change)="onImagePicked($event)">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview">
+    </div>
     </div>
     <button mat-raised-button color="accent" type="submit">Ingatlan feltöltése</button>
   </form>

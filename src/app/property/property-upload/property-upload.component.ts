@@ -128,14 +128,11 @@ export class PropertyUploadComponent implements OnInit {
     }
 
     onSaveProperty() {
-      console.log("megvan2");
       if (this.form.invalid) {
-        console.log('invalid');
         return;
       }
       this.isLoading = true;
       if (this.mode === "create") {
-        console.log("megvan3");
         this.propertyService.addProp(
           this.form.value.city,
           this.form.value.city2,
@@ -150,14 +147,13 @@ export class PropertyUploadComponent implements OnInit {
           this.form.value.furnitured,
           this.form.value.garden,
           this.form.value.attic,
-          this.form.value.pet,
-          this.form.value.smoke,
           this.form.value.heatingType,
           this.form.value.elevator,
           this.form.value.descripton,
-          this.form.value.level
+          this.form.value.level,
+          this.form.value.image
         );
-        console.log('form value address:' + this.form.value.address);
+        console.log(this.form.value.image.name);
       } else {
         this.propertyService.updateProp(
           this.propId,
@@ -183,7 +179,6 @@ export class PropertyUploadComponent implements OnInit {
           this.form.value.featured
         );
       }
-      console.log("vege");
       this.form.reset();
     }
   }

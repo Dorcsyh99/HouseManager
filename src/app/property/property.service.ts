@@ -94,32 +94,31 @@ export class PropertyService {
   }
 
   addProp(city: string, city2: string, address: string, type: string, size: number, price: number, condition: string, year: number,
-    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean, pet: boolean,
-    smoke: boolean, heatingType: string, elevator: boolean, level: number, description: string) {
-    let propDataJson = {
-      'city': city,
-      "city2": city2,
-      'address' : address,
-      'type': type,
-      'condition': condition,
-      'year': year,
-      'numberOfRooms': numberOfRooms,
-      'parking': parking,
-      'price': price,
-      'furnitured': furnitured,
-      'garden': garden,
-      'attic': attic,
-      'pet': pet,
-      'smoke': smoke,
-      'size': size,
-      'elevator': elevator,
-      'level': level,
-      'heatingType': heatingType
-    }
+    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean,
+   heatingType: string, elevator: boolean, description: string, level: number, image: File) {
+      const propData = new FormData();
+      propData.append("city", city);
+      propData.append("city2", city2);
+      propData.append("address", address);
+      propData.append("condition", condition);
+      propData.append("price", price as null as string);
+      propData.append("year", year as null as string);
+      propData.append("numberOfRooms", numberOfRooms as null as string);
+      propData.append("garden", garden as null as string);
+      propData.append("attic", attic as null as string);
+      propData.append("heatingType", heatingType as null as string);
+      propData.append("size", size as null as string);
+      propData.append("elevator", elevator as null as string);
+      propData.append("level", level as null as string);
+      propData.append("parking", parking);
+      propData.append("description", description);
+      propData.append("image", image, address);
+      propData.append("type", type);
+    console.log("image: " + image.name);
     this.http
       .post(
         this.url,
-        propDataJson
+        propData
       )
       .subscribe(responseData => {
         this.router.navigate(["/"]);
@@ -184,3 +183,27 @@ export class PropertyService {
       .delete("http://localhost:3000/api/props/" + propId);
   }
 }
+
+
+/* let propDataJson = {
+      'city': city,
+      "city2": city2,
+      'address' : address,
+      'type': type,
+      'condition': condition,
+      'year': year,
+      'numberOfRooms': numberOfRooms,
+      'parking': parking,
+      'price': price,
+      'furnitured': furnitured,
+      'garden': garden,
+      'attic': attic,
+      'pet': pet,
+      'smoke': smoke,
+      'size': size,
+      'elevator': elevator,
+      'level': level,
+      'heatingType': heatingType,
+      'description': description,
+      'image': image
+      */

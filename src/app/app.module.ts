@@ -20,6 +20,7 @@ import { AuthIntercepter } from './auth/auth-interceter';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent, SuccessfulRegistrationComponent } from './auth/signup/signup.component';
 import { UserhomeComponent } from './auth/userhome/userhome.component';
+import { PropertyViewComponent } from './property/property-view/property-view.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserhomeComponent } from './auth/userhome/userhome.component';
     LoginComponent,
     SignupComponent,
     UserhomeComponent,
-    SuccessfulRegistrationComponent
+    SuccessfulRegistrationComponent,
+    PropertyViewComponent
   ],
   imports: [
     BrowserModule,

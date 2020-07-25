@@ -7,6 +7,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent, SuccessfulRegistrationComponent } from './auth/signup/signup.component';
 import { UserhomeComponent } from './auth/userhome/userhome.component';
+import { PropertyViewComponent } from './property/property-view/property-view.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'properties', component: PropertyListComponent},
   {path: 'homepage', component: UserhomeComponent},
-  {path: 'success', component: SuccessfulRegistrationComponent}
+  {path: 'success', component: SuccessfulRegistrationComponent},
+  {path: 'property/:id', component: PropertyViewComponent}
 ];
 
 @NgModule({

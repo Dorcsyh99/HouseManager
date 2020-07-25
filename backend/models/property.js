@@ -19,7 +19,7 @@ const propSchema = mongoose.Schema({
   pet: {type: Boolean, required: false},
   smoke: {type: Boolean, required: false},
   heatingType: {type: String, required: false}, //select
-  imagePath: { type: String, required: false },
+  image: { type: String, required: false },
   description: {type: String, required: false},
   featured: {type: Boolean, required: false},
   creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true}

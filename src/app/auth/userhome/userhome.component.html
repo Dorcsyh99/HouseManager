@@ -10,7 +10,7 @@
         <td><a routerLink="homepage">Jelszó módosítása</a></td>
       </tr>
       <tr>
-        <td><a routerLink="homepage">Feltöltött ingatlanok</a></td>
+        <td><a routerLink="homepage">Feltöltött ingatlanok({{this.userData.uploadedProperties}})</a></td>
       </tr>
       <tr>
         <td><a routerLink="homepage">Üzenetek</a></td>
@@ -21,7 +21,7 @@
     <table class="user-datas">
       <tr>
         <td>Név:</td>
-        <td>{{this.userData.lastName}}</td>
+        <td>{{this.userData.lastName}} {{this.userData.firstName}}</td>
       </tr>
       <tr>
         <td>Email cím:</td>
@@ -32,16 +32,12 @@
         <td>{{this.userData.phone}}</td>
       </tr>
       <tr>
-        <td>Cím:</td>
-        <td></td>
-      </tr>
-      <tr>
         <td>Munka:</td>
-        <td></td>
+        <td>{{this.userData.jobTitle}}</td>
       </tr>
       <tr>
         <td>Regisztráció dátuma:</td>
-        <td></td>
+        <td>{{this.userData.registrationDate}}</td>
       </tr>
     </table>
   </div>

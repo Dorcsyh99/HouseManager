@@ -35,7 +35,9 @@ const storage = multer.diskStorage({
 router.post(
   "",
   checkAuth,
+  multer({ storage: storage}).single("image"),
   (req,res,next) => {
+    const url = req.protocol + "://" + req.get("host");
     const prop = new Property({
       city: req.body.city,
       city2: req.body.city2,
@@ -55,7 +57,8 @@ router.post(
       pet: req.body.pet,
       smoke: req.body.smoke,
       heatingType : req.body.heatingType,
-      creator: req.userData.userId
+      creator: req.userData.userId,
+      image: url + "/images/" + req.file.filename
     });
     prop.save().then(updatedProperty => {
       res.status(201).json({
