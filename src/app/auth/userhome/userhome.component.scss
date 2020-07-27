@@ -1,23 +1,32 @@
-.profile-container{
-  margin: 10px 20%;
-  h2{
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    span{
-      color: rgb(46, 100, 37);
-      font-weight: 800;
-    }
+h2{
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 20px 0 40px 0;
+  span{
+    color: rgb(46, 100, 37);
+    font-weight: 800;
   }
+}
+.profile-container{
+  margin: 30px 20%;
+  display: flex;
+  flex-direction: row;
   .left-side{
-    max-width: 50%;
-    min-width: 30%;
-    float: left;
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     img{
       max-width: 160px;
       border-radius: 50%;
+      margin-left: 50%;
+      transform: translate(-70%,0);
+      margin-right: -50%;
+      margin-bottom: 10px;
     }
     .user-options, tr, td{
+      width: 80%;
       padding: 15px 10px;
       border-collapse: collapse;
       border: .5px solid grey;
@@ -30,14 +39,18 @@
         }
       }
     }
-
   }
   .right-side{
-    float: left;
-    max-width: 50%;
-    min-width: 70%;
-    .user-datas{
-
+    flex-grow: 7;
+    display: flex;
+    flex-direction: column;
+    .user-datas, tr, td{
+      border-collapse: collapse;
+      border-radius: 50px;
+      border: 1px solid grey;
+      border-left: none;
+      border-right: none;
+      padding: 25px 15px;
     }
   }
 }

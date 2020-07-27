@@ -77,7 +77,8 @@ router.get("/:id", (req, res, next) => {
         lastName: user.lastName,
         phone: user.phone,
         image: user.image,
-        jobTitle: user.jobTitle
+        jobTitle: user.jobTitle,
+        uploadedProperties: user.uploadedProperties,
       });
     } else {
       res.status(404).json({ message: "User not found!" });

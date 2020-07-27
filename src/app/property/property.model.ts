@@ -20,4 +20,6 @@ export interface Property {
   heatingType: string;
   description: string;
   featured: boolean;
+  image: string;
+  creator: string;
 }

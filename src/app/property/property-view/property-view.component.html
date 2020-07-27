@@ -1,15 +1,68 @@
 <div class="prop-container">
   <div class="top-side">
-    <div class="images-container"> <!-- galéria -->
-
+    <div class="image-and-address-card">
+      <div class="images-container"> <!-- galéria -->
+        <img [src]="property.image">
+      </div>
+      <div class="address">
+        <p>{{property.city}} <span *ngIf="property.city2 !== ''">,{{property.city2}} kerület</span></p>
+        <p>{{property.address}}</p>
+        <p>Ár: {{priceFormatting(property.price)}} millió forint</p>
+      </div>
     </div>
     <div class="uploader-datas"> <!-- user adatai, üzenetküldés -->
-
+      <h3>Feltöltő adatai</h3>
+      <hr>
+      <p>
+        <span>Név:</span>
+        <span>{{user.lastName}} {{user.firstName}}</span>
+      </p>
+      <a mat-button href="mailto: {{user.email}}">Email küldése</a>
+      <a mat-button href="tel: 0{{user.phone}}">Hívás</a>
     </div>
   </div>
   <div class="second-side">
     <div class="prop-datas-container"> <!-- ingatlan adatai táblázatban-->
-      <table></table>
+      <p>
+        <span>Méret</span>
+        <span>{{property.size}} négyzetméter</span>
+      </p>
+      <p>
+        <span>Állapot</span>
+        <span>{{property.condition}}</span>
+      </p>
+      <p>
+        <span>Szobák száma</span>
+        <span>{{property.numberOfRooms}}</span>
+      </p>
+      <p>
+        <span>Építés éve</span>
+        <span>{{property.year}}</span>
+      </p>
+      <p>
+        <span>Parkolás</span>
+        <span>{{property.parking}}</span>
+      </p>
+      <p>
+        <span>Fűtés típusa</span>
+        <span>{{property.heatingType}}</span>
+      </p>
+      <p>
+        <span>Lift</span>
+        <span>{{property.elevator ? "Van" : "Nincs"}}</span>
+      </p>
+      <p>
+        <span></span>
+        <span></span>
+      </p>
+      <p>
+        <span></span>
+        <span></span>
+      </p>
+      <p>
+        <span></span>
+        <span></span>
+      </p>
     </div>
   </div>
   <div class="bottom-side">

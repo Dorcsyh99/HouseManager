@@ -45,7 +45,8 @@ export class PropertyService {
                 heatingType: prop.heatingType,
                 id: prop._id,
                 featured: prop.featured,
-                creator: prop.creator
+                creator: prop.creator,
+                image: prop.image
               };
             }),
             maxProps: propData.maxProps
@@ -90,6 +91,7 @@ export class PropertyService {
       heatingType: string;
       featured: boolean;
       creator: string;
+      image: string;
     }>("http://localhost:3000/api/props/" + id);
   }
 
@@ -101,15 +103,15 @@ export class PropertyService {
       propData.append("city2", city2);
       propData.append("address", address);
       propData.append("condition", condition);
-      propData.append("price", price as null as string);
-      propData.append("year", year as null as string);
-      propData.append("numberOfRooms", numberOfRooms as null as string);
-      propData.append("garden", garden as null as string);
-      propData.append("attic", attic as null as string);
-      propData.append("heatingType", heatingType as null as string);
-      propData.append("size", size as null as string);
-      propData.append("elevator", elevator as null as string);
-      propData.append("level", level as null as string);
+      propData.append("price", price as unknown as string);
+      propData.append("year", year as unknown as string);
+      propData.append("numberOfRooms", numberOfRooms as unknown as string);
+      propData.append("garden", garden as unknown as string);
+      propData.append("attic", attic as unknown as string);
+      propData.append("heatingType", heatingType);
+      propData.append("size", size as unknown as string);
+      propData.append("elevator", elevator as unknown as string);
+      propData.append("level", level as unknown as Blob);
       propData.append("parking", parking);
       propData.append("description", description);
       propData.append("image", image, address);
@@ -127,7 +129,7 @@ export class PropertyService {
 
   updateProp(id: string, city: string, city2: string, address: string, type: string, size: number, price: number, condition: string, year: number,
     numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean, pet: boolean,
-    smoke: boolean, heatingType: string, elevator: boolean, level: number, description: string, featured: boolean) {
+    smoke: boolean, heatingType: string, elevator: boolean, level: number, description: string, creator: string, featured: boolean, image: string) {
     let propData: Property | FormData;
     /*if (typeof image === "object") {
       propData = new FormData();
@@ -169,7 +171,9 @@ export class PropertyService {
         level: level,
         description: description,
         heatingType: heatingType,
-        featured: featured
+        featured: featured,
+        image: image,
+        creator: creator
       };
     this.http
       .put("http://localhost:3000/api/props/" + id, propData)

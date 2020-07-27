@@ -23,3 +23,4 @@ export interface LoggedInUser{
   jobTitle: string;
   uploadedProperties: number;
 }
+

@@ -85,7 +85,9 @@ export class PropertyUploadComponent implements OnInit {
               level: propData.level,
               description: propData.description,
               heatingType: propData.heatingType,
-              featured: propData.featured
+              featured: propData.featured,
+              image: propData.image,
+              creator: propData.creator
             };
             this.form.setValue({
               city: this.prop.city,
@@ -176,7 +178,9 @@ export class PropertyUploadComponent implements OnInit {
           this.form.value.level,
           this.form.value.description,
           this.form.value.price,
-          this.form.value.featured
+          this.form.value.featured,
+          this.form.value.image,
+          this.form.value.creator
         );
       }
       this.form.reset();

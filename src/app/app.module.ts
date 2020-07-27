@@ -21,6 +21,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent, SuccessfulRegistrationComponent } from './auth/signup/signup.component';
 import { UserhomeComponent } from './auth/userhome/userhome.component';
 import { PropertyViewComponent } from './property/property-view/property-view.component';
+import { ForumHomeComponent } from './forum/forum-home/forum-home.component';
+import { ExpertHomeComponent } from './expert/expert-home/expert-home.component';
+import { ExpertViewComponent } from './expert/expert-view/expert-view.component';
+import { ExpertSearchComponent } from './expert/expert-search/expert-search.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { PropertyViewComponent } from './property/property-view/property-view.co
     SignupComponent,
     UserhomeComponent,
     SuccessfulRegistrationComponent,
-    PropertyViewComponent
+    PropertyViewComponent,
+    ForumHomeComponent,
+    ExpertHomeComponent,
+    ExpertViewComponent,
+    ExpertSearchComponent
   ],
   imports: [
     BrowserModule,
