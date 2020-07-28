@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { PropertyService } from "../property.service";
 import { Property } from "../property.model";
@@ -21,6 +22,8 @@ export class PropertyUploadComponent implements OnInit {
     imagePreview: string;
     private mode = "create";
     private propId: string;
+    addressForm: FormGroup;
+    datasForm: FormGroup;
 
     constructor(
       public propertyService: PropertyService,
@@ -28,24 +31,33 @@ export class PropertyUploadComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-      this.form = new FormGroup({
+      this.addressForm = new FormGroup({
         city: new FormControl(null, {
           validators: [Validators.required, Validators.minLength(3)]
         }),
         city2: new FormControl(null),
         address: new FormControl(null, {
           validators: [Validators.required, Validators.minLength(3)]
-        }),
+        })
+      });
+      this.datasForm = new FormGroup({
         size: new FormControl(null, {validators: [Validators.required]}),
-        type: new FormControl(null, { validators: [Validators.required] }),
         price: new FormControl(null, {validators: [Validators.required]}),
+        condition: new FormControl(null, {validators: [Validators.required]}),
+        numberOfRooms: new FormControl(null, {validators: [Validators.required]}),
+        year: new FormControl(null, {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(3)]}),
+        heatingType: new FormControl(null),
+      })
+      this.form = new FormGroup({
+
+        type: new FormControl(null, { validators: [Validators.required] }),
+
         description: new FormControl(null),
         image: new FormControl(null, {
           asyncValidators: [mimeType]
         }),
-        condition: new FormControl(null, {validators: [Validators.required]}),
-        numberOfRooms: new FormControl(null, {validators: [Validators.required]}),
-        year: new FormControl(null, {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(3)]}),
+
+
         parking: new FormControl(null, {validators: [Validators.required]}),
         furnitured: new FormControl(null, {validators: [Validators.required]}),
         elevator: new FormControl(null, {validators: []}),
@@ -54,7 +66,7 @@ export class PropertyUploadComponent implements OnInit {
         attic: new FormControl(null),
         pet: new FormControl(null),
         smoke: new FormControl(null),
-        heatingType: new FormControl(null),
+
         featured: new FormControl(null)
       });
       this.route.paramMap.subscribe((paramMap: ParamMap) => {

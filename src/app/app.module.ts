@@ -12,7 +12,7 @@ import { MainPageWrapperComponent } from './main-page-wrapper/main-page-wrapper.
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatGridListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDialogModule, MatStepperModule, MatDividerModule, MatSelectModule} from '@angular/material';
+import {MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatGridListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDialogModule, MatStepperModule, MatDividerModule, MatSelectModule, MatStepperIntl} from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FeaturedPropertiesComponent } from './property/featured-properties/featured-properties.component';
 import { PropertySearchComponent } from './property/property-search/property-search.component';
@@ -67,7 +67,8 @@ import { ExpertSearchComponent } from './expert/expert-search/expert-search.comp
     MatSelectModule
   ],
   entryComponents : [],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthIntercepter, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthIntercepter, multi: true},
+    {provide: MatStepperIntl}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
