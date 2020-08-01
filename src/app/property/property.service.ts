@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
@@ -95,9 +95,9 @@ export class PropertyService {
     }>("http://localhost:3000/api/props/" + id);
   }
 
-  addProp(city: string, city2: string, address: string, type: string, size: number, price: number, condition: string, year: number,
-    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean,
-   heatingType: string, elevator: boolean, description: string, level: number, image: File) {
+  addProp(type: string, city: string, city2: string, address: string,  size: number, price: number, condition: string, year: number,
+    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean, pet: boolean, smoke: boolean,
+    heatingType: string, elevator: boolean, description: string, level: number, image: File) {
       const propData = new FormData();
       propData.append("city", city);
       propData.append("city2", city2);
@@ -112,6 +112,9 @@ export class PropertyService {
       propData.append("size", size as unknown as string);
       propData.append("elevator", elevator as unknown as string);
       propData.append("level", level as unknown as Blob);
+      propData.append("furnitured", furnitured as unknown as Blob);
+      propData.append("pet", pet as unknown as Blob);
+      propData.append("smoke", smoke as unknown as Blob);
       propData.append("parking", parking);
       propData.append("description", description);
       propData.append("image", image, address);
@@ -127,9 +130,24 @@ export class PropertyService {
       });
   }
 
-  updateProp(id: string, city: string, city2: string, address: string, type: string, size: number, price: number, condition: string, year: number,
-    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean, pet: boolean,
-    smoke: boolean, heatingType: string, elevator: boolean, level: number, description: string, creator: string, featured: boolean, image: string) {
+  searchProps(city: string, minSize: number, maxSize: number, minPrice: number, maxPrice: number){
+    console.log("belépett ide");
+    console.log(city);
+    let params = new HttpParams().set("city", city).set("minSize", minSize as unknown as string)
+    .set("maxSize", maxSize as unknown as string).set("minPrice", minPrice as unknown as string)
+    .set("maxPrice", maxPrice as unknown as string);
+    this.http.get("http://localhost:3000/api/props/search", {params: params}).subscribe(res => {
+      this.router.navigate(["/searchResults/" + params]);
+    });
+  }
+
+  getSearchResults(city: string, minSize: string = "", maxSize: string = "", minPrice: string = "", maxPrice: string = ""){
+
+  }
+
+  updateProp(id: string, type: string, city: string, city2: string, address: string,  size: number, price: number, condition: string, year: number,
+    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean, pet: boolean, smoke: boolean,
+    heatingType: string, elevator: boolean, description: string, level: number, image: string) {
     let propData: Property | FormData;
     /*if (typeof image === "object") {
       propData = new FormData();
@@ -171,9 +189,9 @@ export class PropertyService {
         level: level,
         description: description,
         heatingType: heatingType,
-        featured: featured,
         image: image,
-        creator: creator
+        creator: '12',
+        featured: false
       };
     this.http
       .put("http://localhost:3000/api/props/" + id, propData)

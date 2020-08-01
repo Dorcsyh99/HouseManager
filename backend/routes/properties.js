@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const bodyParser = require("body-parser");
+var url = require("url");
 
 const checkAuth = require("../middleware/check-auth");
 
@@ -114,6 +115,28 @@ router.put(
     });
   }
 );
+
+router.get("/search", (req, res, next) => {
+  const reqCity = req.query.city;
+  const reqMinSize = req.query.minSize;
+  const reqMaxSize = req.query.maxSize;
+  const reqMinPrice = req.query.minPrice;
+  const reqMaxPrice = req.query.maxPrice;
+  const query = Property.find({city: reqCity});
+  let searchResults;
+  query.then(documents => {
+    searchResults = documents;
+    console.log(searchResults);
+    return Property.count();
+  }).then(count => {
+    res.status(200).json({
+      message: "Success",
+      props: searchResults,
+      maxResults: count
+    });
+  });
+  console.log(searchResults);
+});
 
 router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;

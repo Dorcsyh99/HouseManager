@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent, SuccessfulRegistrationComponent } from './auth/signup/signup.component';
 import { UserhomeComponent } from './auth/userhome/userhome.component';
 import { PropertyViewComponent } from './property/property-view/property-view.component';
+import { PropertySearchResultsComponent } from './property/property-search/property-search.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'properties', component: PropertyListComponent},
   {path: 'homepage', component: UserhomeComponent},
   {path: 'success', component: SuccessfulRegistrationComponent},
-  {path: 'property/:id', component: PropertyViewComponent}
+  {path: 'property/:id', component: PropertyViewComponent},
+  {path: 'searchResults/:params', component: PropertySearchResultsComponent }
 ];
 
 @NgModule({

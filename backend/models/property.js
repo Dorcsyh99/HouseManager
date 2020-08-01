@@ -28,4 +28,4 @@ const propSchema = mongoose.Schema({
 module.exports = mongoose.model("Property", propSchema);
 
 
-// mongo "mongodb+srv://cluster0-fwp6n.azure.mongodb.net/test"  --username Admin
+// mongo "mongodb+srv://cluster0-fwp6n.azure.mongodb.net"  --username Admin

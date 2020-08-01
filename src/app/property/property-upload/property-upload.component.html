@@ -1,17 +1,32 @@
-
-<div class="upload-container">
-  <mat-horizontal-stepper>
-    <mat-step label="1. step">
-      dfhdf
-    </mat-step>
-    <mat-step label="2. step">
-      sgsdg
-    </mat-step>
-  </mat-horizontal-stepper>
- <!--<mat-horizontal-stepper #stepper>
-    <mat-step label="Ingatlan cím adatok">
-      <form [formGroup]="addressForm">
-        <!-- <ng-template matStepLabel>Ingatlan cím adatok</ng-template>
+ <div class="upload-container">
+  <div class="stepper-container">
+    <div class="stepper-header">
+      <div [ngClass]="{'currentLabel': currentStep===0}" class="step-label">
+        Ingatlan típusa
+      </div>
+      <div [ngClass]="{'currentLabel': currentStep===1}" class="step-label">
+        Ingatlan cím adatok
+      </div>
+      <div [ngClass]="{'currentLabel': currentStep===2}" class="step-label">
+        Alapadatok
+      </div>
+      <div [ngClass]="{'currentLabel': currentStep===3}" class="step-label">
+        Opcionális adatok
+      </div>
+      <div [ngClass]="{'currentLabel': currentStep===4}" class="step-label">
+        Képek feltöltése, leírás
+      </div>
+    </div>
+    <div *ngIf="currentStep===0" class="step">
+      <div class="type-select">
+        <form [formGroup]="typeForm">
+          <button class="instead-radio" (click)="typeSelect(1)" type="button" mat-button>Eladó</button>
+          <button class="instead-radio" (click)="typeSelect(2)" mat-button type="button">Kiadó</button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="currentStep===1" class="step">
+      <form [formGroup]="addressForm" class="form-group">
         <mat-form-field appearance="outline">
           <mat-label>Város</mat-label>
           <input matInput type="text" class="regular-input" formControlName="city" required>
@@ -27,13 +42,12 @@
           <mat-error *ngIf="addressForm.get('address').invalid">Kérjük, írjon be címet.</mat-error>
         </mat-form-field>
       </form>
-    </mat-step>
-    <mat-step>
-      <form [formGroup]="datasForm">
-        <!-- <ng-template matStepLabel>Alapadatok</ng-template>
+    </div>
+    <div *ngIf="currentStep===2" class="step">
+      <form [formGroup]="datasForm" class="form-group">
         <mat-form-field appearance="outline">
           <mat-label>Az ingatlan állapota</mat-label>
-          <mat-select required matInput required>
+          <mat-select formControlName="condition" required matInput required>
             <mat-option value="Új építésű">Új építésű</mat-option>
             <mat-option value="Újszerű">Újszerű</mat-option>
             <mat-option value="Felújított">Felújított</mat-option>
@@ -63,7 +77,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Fűtés típusa</mat-label>
-          <mat-select required matInput required>
+          <mat-select formControlName="heatingType" required matInput required>
             <mat-option value="Gáz (cirko)">Gáz (cirko)</mat-option>
             <mat-option value="Gáz (konvektor)">Gáz (konvektor)</mat-option>
             <mat-option value="Házközponti">Házközponti</mat-option>
@@ -78,61 +92,50 @@
           </mat-select>
         </mat-form-field>
       </form>
-    </mat-step>
-  </mat-horizontal-stepper> -->
-</div>
-
-<mat-card>
-  <form [formGroup]="form" (submit)="onSaveProperty()" *ngIf="!isLoading">
-      <h3>Az alábbi mezők kitöltése kötelező</h3>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Parkolás</mat-label>
-      <mat-select matInput required>
-        <mat-option value="Udvari beálló">Udvari beálló</mat-option>
-        <mat-option value="Garázs">Garázs</mat-option>
-        <mat-option value="Utca, közterület">Utca, közterület</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Emelet</mat-label>
-      <input matInput type="number" class="regular-input" formControlName="level" min=1>
-    </mat-form-field>
-    <div class="radio-container">
-    <mat-radio-group formControlName="elevator">
-      <mat-label>Lift</mat-label>
-      <mat-radio-button matInput value=1>Igen</mat-radio-button>
-      <mat-radio-button matInput value=0>Nem</mat-radio-button>
-    </mat-radio-group>
+    </div>
+    <div *ngIf="currentStep===3" class="step">
+      <form [formGroup]="optionalForm" class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Emelet</mat-label>
+          <input matInput type="number" class="regular-input" formControlName="level" min=1>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Parkolás</mat-label>
+          <mat-select formControlName="parking" matInput required>
+            <mat-option value="Udvari beálló">Udvari beálló</mat-option>
+            <mat-option value="Garázs">Garázs</mat-option>
+            <mat-option value="Utca, közterület">Utca, közterület</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-radio-group>
+          <mat-radio-button class="optional-radio" value="true" name="elevator">Lift</mat-radio-button>
+          <mat-radio-button class="optional-radio" value="true" name="garden">Kert</mat-radio-button>
+          <mat-radio-button class="optional-radio" value="true" name="attic">Erkélyes</mat-radio-button>
+          <mat-radio-button class="optional-radio" value="true" name="smoke">Dohányzás megengedett</mat-radio-button>
+          <mat-radio-button class="optional-radio" value="true" name="pet">Kisállat hozható</mat-radio-button>
+          <mat-radio-button class="optional-radio" value="true" name="furnitured">Bútorozott</mat-radio-button>
+        </mat-radio-group>
+      </form>
+    </div>
+    <div *ngIf="currentStep===4" class="step">
+      <form [formGroup]="imageForm" class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Leírás</mat-label>
+        <input matInput type="textarea" class="long-input" formControlName="description">
+      </mat-form-field>
+      <div>
+        <button mat-button (click)="filePicker.click()" type="button">Képek feltöltése</button>
+        <input  #filePicker class="hidden" type="file" (change)="onImagePicked($event)">
+      </div>
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && imageForm.get('image').valid">
+        <img [src]="imagePreview">
+      </div>
+    </form>
+    </div>
+    <div class="button-container">
+      <button *ngIf="currentStep<4 && currentStep!=0" class="next-btn" type="button" mat-button (click)="stepNext()">Következő</button>
+      <button *ngIf="currentStep>1" class="prev-btn" type="button" mat-button (click)="stepBack()">Előző</button>
+      <button *ngIf="currentStep===4" class="final-btn" mat-raised-button color="accent" type="submit" (click)="onSaveProperty()">Ingatlan feltöltése</button>
+    </div>
   </div>
-  <div class="radio-container">
-    <mat-radio-group formControlName="garden">
-      <mat-label>Kert</mat-label>
-      <mat-radio-button matInput value=1>Igen</mat-radio-button>
-      <mat-radio-button matInput value=0>Nem</mat-radio-button>
-    </mat-radio-group>
-  </div>
-    <div class="radio-container">
-    <mat-radio-group formControlName="attic">
-      <mat-label>Erkély</mat-label>
-      <mat-radio-button matInput value=1>Igen</mat-radio-button>
-      <mat-radio-button matInput value=0>Nem</mat-radio-button>
-    </mat-radio-group>
-    </div>
-    <div class="radio-container">
-    <mat-form-field appearance="outline">
-      <mat-label>Leírás</mat-label>
-      <input matInput type="textarea" class="long-input" formControlName="description">
-    </mat-form-field>
-    <div>
-      <button mat-button (click)="filePicker.click()" type="button">Képek feltöltése</button>
-      <input  #filePicker class="hidden" type="file" (change)="onImagePicked($event)">
-    </div>
-    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
-      <img [src]="imagePreview">
-    </div>
-    </div>
-    <button mat-raised-button color="accent" type="submit">Ingatlan feltöltése</button>
-  </form>
-</mat-card>
+ </div>

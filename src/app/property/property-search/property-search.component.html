@@ -1,14 +1,23 @@
 <div class="form-container">
-  <form>
-    <mat-form-field>
-      <input matInput name="city">
+  <form [formGroup]="searchForm">
+    <mat-form-field class="city-input" appearance="outline">
+      <mat-label>Város, település</mat-label>
+      <input matInput placeholder="Város" type="text" formControlName="city" name="city">
     </mat-form-field>
     <mat-form-field>
-      <input matInput name="price">
+      <mat-label>Ár (Millió forint)</mat-label>
+      <input class="price-input" matInput type="number" name="minPrice" formControlName="minPrice">
     </mat-form-field>
     <mat-form-field>
-      <input matInput name="size">
+      <input class="price-input" matInput type="number" name="maxPrice" formControlName="maxPrice">
     </mat-form-field>
-    <button mat-button>Keresés</button>
+    <mat-form-field>
+      <mat-label>Méret (négyzetméter)</mat-label>
+      <input class="size-input" matInput type="number" name="minSize" formControlName="minSize">
+    </mat-form-field>
+    <mat-form-field>
+      <input class="size-input" matInput type="number" name="maxSize" formControlName="maxSize">
+    </mat-form-field>
+    <button type="submit" (click)="searchProps()" mat-button>Keresés</button>
   </form>
 </div>
