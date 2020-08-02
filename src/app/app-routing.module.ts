@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'homepage', component: UserhomeComponent},
   {path: 'success', component: SuccessfulRegistrationComponent},
   {path: 'property/:id', component: PropertyViewComponent},
-  {path: 'searchResults/:params', component: PropertySearchResultsComponent }
+  {path: 'searchResults', component: PropertySearchResultsComponent }
 ];
 
 @NgModule({

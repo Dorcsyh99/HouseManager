@@ -32,6 +32,7 @@ export class FeaturedPropertiesComponent implements OnInit {
         this.isLoading = false;
         this.totalProps = propData.propCount;
         this.props = propData.props;
+        console.log(this.props);
       });
     }
 

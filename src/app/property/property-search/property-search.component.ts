@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PropertyService } from '../property.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Property } from '../property.model';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-property-search',
@@ -51,27 +54,21 @@ export class PropertySearchComponent implements OnInit {
 })
 export class PropertySearchResultsComponent implements OnInit {
 
-  city: string;
-  minSize: string;
-  maxSize: string;
-  minPrice: string;
-  maxPrice: string;
+  resultSub: Subscription;
+  props: Property [] = [];
+  totalResults: number;
 
 
   constructor(private propertyService: PropertyService, private router: ActivatedRoute){}
 
   ngOnInit(){
-    this.router.paramMap.subscribe(params => {
-      this.city = params.get("city");
-      this.minSize = params.get("minSize");
-      this.maxSize = params.get("maxSize");
-      this.minPrice = params.get("minPrice");
-      this.maxPrice = params.get("maxPrice");
-    })
-  }
-
-  getSearchResults(){
-
+    this.resultSub = this.propertyService
+      .getSearchResultListener()
+      .subscribe((propData: {props: Property[], resultCount: number}) => {
+        this.totalResults = propData.resultCount;
+        this.props = propData.props;
+        console.log(this.props);
+      });
   }
 }
 

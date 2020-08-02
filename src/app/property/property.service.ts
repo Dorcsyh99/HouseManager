@@ -11,6 +11,7 @@ export class PropertyService {
   private props: Property[] = [];
   private url = "http://localhost:3000/api/props";
   private propsUpdated = new Subject<{ props: Property[]; propCount: number }>();
+  private searchResultsUpdated = new Subject<{ props: Property[]; resultCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -136,9 +137,51 @@ export class PropertyService {
     let params = new HttpParams().set("city", city).set("minSize", minSize as unknown as string)
     .set("maxSize", maxSize as unknown as string).set("minPrice", minPrice as unknown as string)
     .set("maxPrice", maxPrice as unknown as string);
-    this.http.get("http://localhost:3000/api/props/search", {params: params}).subscribe(res => {
-      this.router.navigate(["/searchResults/" + params]);
+    this.http.get<{props: any, maxResults: number}>("http://localhost:3000/api/props/search", {params: params}).pipe(
+      map(propData => {
+        return {
+          props: propData.props.map(prop => {
+            return {
+              city: prop.city,
+              city2: prop.city2,
+              address: prop.address,
+              type: prop.type,
+              size: prop.size,
+              condition: prop.condition,
+              price: prop.price,
+              year: prop.year,
+              numberOfRooms: prop.numberOfRooms,
+              parking: prop.parking,
+              furnitured: prop.furnitured,
+              garden: prop.garden,
+              attic: prop.attic,
+              pet: prop.pet,
+              smoke: prop.smoke,
+              elevator: prop.elevator,
+              level: prop.level,
+              heatingType: prop.heatingType,
+              id: prop._id,
+              featured: prop.featured,
+              creator: prop.creator,
+              image: prop.image
+            };
+          }),
+          maxProps: propData.maxResults
+        };
+      })
+    ).subscribe(transSearchData => {
+      console.log(transSearchData);
+      this.props = transSearchData.props;
+      this.searchResultsUpdated.next({
+        props: [...this.props],
+        resultCount: transSearchData.maxProps
+      });
+      this.router.navigate(['/searchResults'], {queryParams: {city: city, minSize: minSize, minPrice: minPrice}});
     });
+  }
+
+  getSearchResultListener(){
+    return this.searchResultsUpdated.asObservable();
   }
 
   getSearchResults(city: string, minSize: string = "", maxSize: string = "", minPrice: string = "", maxPrice: string = ""){
