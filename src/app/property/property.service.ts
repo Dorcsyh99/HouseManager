@@ -11,15 +11,14 @@ export class PropertyService {
   private props: Property[] = [];
   private url = "http://localhost:3000/api/props";
   private propsUpdated = new Subject<{ props: Property[]; propCount: number }>();
-  private searchResultsUpdated = new Subject<{ props: Property[]; resultCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProps(propsPerPage: number, currentPage: number) {
-    const queryParams = `?pagesize=${propsPerPage}&page=${currentPage}`;
+  getProps() {
+    //const queryParams = `?pagesize=${propsPerPage}&page=${currentPage}`;
     this.http
       .get<{ message: string; props: any; maxProps: number }>(
-        "http://localhost:3000/api/props" + queryParams
+        "http://localhost:3000/api/props" //+ queryParams
       )
       .pipe(
         map(propData => {
@@ -55,7 +54,6 @@ export class PropertyService {
         })
       )
       .subscribe(transformedPropData => {
-        console.log(transformedPropData);
         this.props = transformedPropData.props;
         this.propsUpdated.next({
           props: [...this.props],
@@ -97,8 +95,10 @@ export class PropertyService {
   }
 
   addProp(type: string, city: string, city2: string, address: string,  size: number, price: number, condition: string, year: number,
-    numberOfRooms: number, parking: string, furnitured: boolean, garden: boolean, attic: boolean, pet: boolean, smoke: boolean,
-    heatingType: string, elevator: boolean, description: string, level: number, image: File) {
+    numberOfRooms: number, parking: string, furnitured= 'false', garden='false', attic="false", pet="false" , smoke="false",
+    heatingType: string, elevator="false", description: string, level: number, image: File
+    ) {
+      console.log("INADDPROP");
       const propData = new FormData();
       propData.append("city", city);
       propData.append("city2", city2);
@@ -118,74 +118,16 @@ export class PropertyService {
       propData.append("smoke", smoke as unknown as Blob);
       propData.append("parking", parking);
       propData.append("description", description);
-      propData.append("image", image, address);
+      //propData.append("image", new Blob([image], {type: 'application/json'}));
       propData.append("type", type);
-    console.log("image: " + image.name);
     this.http
-      .post(
+      .post<{message: string; prop: Property, headers: {"content-type": "multipart/form-data"}}>(
         this.url,
         propData
       )
       .subscribe(responseData => {
         this.router.navigate(["/"]);
       });
-  }
-
-  searchProps(city: string, minSize: number, maxSize: number, minPrice: number, maxPrice: number){
-    console.log("belépett ide");
-    console.log(city);
-    let params = new HttpParams().set("city", city).set("minSize", minSize as unknown as string)
-    .set("maxSize", maxSize as unknown as string).set("minPrice", minPrice as unknown as string)
-    .set("maxPrice", maxPrice as unknown as string);
-    this.http.get<{props: any, maxResults: number}>("http://localhost:3000/api/props/search", {params: params}).pipe(
-      map(propData => {
-        return {
-          props: propData.props.map(prop => {
-            return {
-              city: prop.city,
-              city2: prop.city2,
-              address: prop.address,
-              type: prop.type,
-              size: prop.size,
-              condition: prop.condition,
-              price: prop.price,
-              year: prop.year,
-              numberOfRooms: prop.numberOfRooms,
-              parking: prop.parking,
-              furnitured: prop.furnitured,
-              garden: prop.garden,
-              attic: prop.attic,
-              pet: prop.pet,
-              smoke: prop.smoke,
-              elevator: prop.elevator,
-              level: prop.level,
-              heatingType: prop.heatingType,
-              id: prop._id,
-              featured: prop.featured,
-              creator: prop.creator,
-              image: prop.image
-            };
-          }),
-          maxProps: propData.maxResults
-        };
-      })
-    ).subscribe(transSearchData => {
-      console.log(transSearchData);
-      this.props = transSearchData.props;
-      this.searchResultsUpdated.next({
-        props: [...this.props],
-        resultCount: transSearchData.maxProps
-      });
-      this.router.navigate(['/searchResults'], {queryParams: {city: city, minSize: minSize, minPrice: minPrice}});
-    });
-  }
-
-  getSearchResultListener(){
-    return this.searchResultsUpdated.asObservable();
-  }
-
-  getSearchResults(city: string, minSize: string = "", maxSize: string = "", minPrice: string = "", maxPrice: string = ""){
-
   }
 
   updateProp(id: string, type: string, city: string, city2: string, address: string,  size: number, price: number, condition: string, year: number,

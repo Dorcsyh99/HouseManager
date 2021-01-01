@@ -12,10 +12,9 @@ import { MainPageWrapperComponent } from './main-page-wrapper/main-page-wrapper.
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatGridListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDialogModule, MatStepperModule, MatDividerModule, MatSelectModule, MatStepperIntl} from '@angular/material';
+import {MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatGridListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDialogModule, MatStepperModule, MatDividerModule, MatSelectModule, MatStepperIntl, MatCheckboxModule} from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FeaturedPropertiesComponent } from './property/featured-properties/featured-properties.component';
-import { PropertySearchComponent, PropertySearchResultsComponent } from './property/property-search/property-search.component';
 import { AuthIntercepter } from './auth/auth-interceter';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent, SuccessfulRegistrationComponent } from './auth/signup/signup.component';
@@ -34,7 +33,6 @@ import { ExpertSearchComponent } from './expert/expert-search/expert-search.comp
     MainPageWrapperComponent,
     NavBarComponent,
     FeaturedPropertiesComponent,
-    PropertySearchComponent,
     LoginComponent,
     SignupComponent,
     UserhomeComponent,
@@ -44,7 +42,6 @@ import { ExpertSearchComponent } from './expert/expert-search/expert-search.comp
     ExpertHomeComponent,
     ExpertViewComponent,
     ExpertSearchComponent,
-    PropertySearchResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +62,8 @@ import { ExpertSearchComponent } from './expert/expert-search/expert-search.comp
     MatFormFieldModule,
     MatStepperModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   entryComponents : [],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthIntercepter, multi: true},

@@ -36,8 +36,9 @@ const storage = multer.diskStorage({
 router.post(
   "",
   checkAuth,
-  multer({ storage: storage}).single("image"),
+  multer({storage: storage}).single('image'),
   (req,res,next) => {
+    console.log(req.headers);
     const url = req.protocol + "://" + req.get("host");
     const prop = new Property({
       city: req.body.city,
@@ -59,9 +60,10 @@ router.post(
       smoke: req.body.smoke,
       heatingType : req.body.heatingType,
       creator: req.userData.userId,
-      image: url + "/images/" + req.file.filename
+     // image: url + "/images/" + req.file.filename
     });
     prop.save().then(updatedProperty => {
+      console.log(updatedProperty);
       res.status(201).json({
         message: "Post added successfully",
         prop: {
@@ -111,22 +113,16 @@ router.put(
       } else{
         res.status(401).json({ message: "Not authorized!" });
       }
-
     });
   }
 );
 
 router.get("/search", (req, res, next) => {
   const reqCity = req.query.city;
-  const reqMinSize = req.query.minSize;
-  const reqMaxSize = req.query.maxSize;
-  const reqMinPrice = req.query.minPrice;
-  const reqMaxPrice = req.query.maxPrice;
   const query = Property.find({city: reqCity});
   let searchResults;
   query.then(documents => {
     searchResults = documents;
-    console.log(searchResults);
     return Property.count();
   }).then(count => {
     res.status(200).json({
@@ -135,7 +131,6 @@ router.get("/search", (req, res, next) => {
       maxResults: count
     });
   });
-  console.log(searchResults);
 });
 
 router.get("", (req, res, next) => {

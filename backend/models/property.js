@@ -22,7 +22,7 @@ const propSchema = mongoose.Schema({
   image: { type: String, required: false },
   description: {type: String, required: false},
   featured: {type: Boolean, required: false},
-  creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true}
+  creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: false}
 });
 
 module.exports = mongoose.model("Property", propSchema);

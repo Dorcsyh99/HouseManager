@@ -1,30 +1,40 @@
-<!-- <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let post of posts">
-    <mat-expansion-panel-header>
-      {{ post.title }}
-    </mat-expansion-panel-header>
-    <div class="post-image">
-      <img [src]="post.imagePath" [alt]="post.title">
+<div class="search-bar">
+  <mat-form-field class="city-input" appearance="outline">
+    <mat-label>Város, település</mat-label>
+    <input #search (keyup.enter)="onEnter(search.value)" matInput placeholder="Város" type="text" >
+  </mat-form-field>
+  <button type="submit" (click)="onEnter(search.value)" mat-button>Keresés</button>
+</div>
+<div class="left-side">
+  <div class="prop-card-container" *ngIf="this.filter == false">
+    <div class="props-container" *ngFor="let prop of props">
+      <div class="prop-card">
+        <div class="img-container">
+          <img src="{{prop.image}}">
+        </div>
+        <button mat-button>Megnézem</button>
+        <div class="card-text">
+          <p>{{prop.city}}<span *ngIf="prop.city=='Budapest'">, {{prop.city2}}</span></p>
+          <p>{{prop.price | currency:'HUF'}}</p>
+          <ul>
+            <li>{{prop.size}} négyzetméter</li>
+            <li>Szobák: {{prop.numberOfRooms}}</li>
+            <li>{{prop.condition}}</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <p>{{ post.content }}</p>
-    <mat-action-row>
-      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
-      <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
-  *ngIf="posts.length > 0"></mat-paginator>
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p>
+  </div>
+  <div class="prop-card-container" *ngIf="this.filter == true">
+    <div class="props-container" *ngFor="let prop of props">
+      <div class="prop-card" *ngIf="prop.city == this.city">
 
-<mat-spinner *ngIf="isLoading"></mat-spinner>-->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right-side"></div>
 
-<mat-grid-list cols="4" rowHeight="2:1" *ngIf="props.length > 0">
-  <mat-grid-tile *ngFor="let prop of props">
-    <mat-card>
-      <mat-card-title>{{prop.address}}</mat-card-title>
-      <mat-card-content>{{prop.type}}</mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+
+
+

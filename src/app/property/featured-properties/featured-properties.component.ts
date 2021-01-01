@@ -25,7 +25,7 @@ export class FeaturedPropertiesComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.propertyService.getProps(this.propsPerPage, this.currentPage);
+    this.propertyService.getProps();
     this.propsSub = this.propertyService
       .getPropsUpdateListener()
       .subscribe((propData: {props: Property[], propCount: number}) => {

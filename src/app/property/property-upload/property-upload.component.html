@@ -107,25 +107,25 @@
             <mat-option value="Utca, közterület">Utca, közterület</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-radio-group>
-          <mat-radio-button class="optional-radio" value="true" name="elevator">Lift</mat-radio-button>
-          <mat-radio-button class="optional-radio" value="true" name="garden">Kert</mat-radio-button>
-          <mat-radio-button class="optional-radio" value="true" name="attic">Erkélyes</mat-radio-button>
-          <mat-radio-button class="optional-radio" value="true" name="smoke">Dohányzás megengedett</mat-radio-button>
-          <mat-radio-button class="optional-radio" value="true" name="pet">Kisállat hozható</mat-radio-button>
-          <mat-radio-button class="optional-radio" value="true" name="furnitured">Bútorozott</mat-radio-button>
-        </mat-radio-group>
+        <section>
+          <mat-checkbox class="optional-selects" name="elevator">Lift</mat-checkbox>
+          <mat-checkbox class="optional-selects" name="furnitured">Bútorozott</mat-checkbox>
+          <mat-checkbox class="optional-selects" name="garden">Kert</mat-checkbox>
+          <mat-checkbox class="optional-selects" name="attic">Erkélyes</mat-checkbox>
+          <mat-checkbox class="optional-selects" name="pet">Kisállat hozható</mat-checkbox>
+          <mat-checkbox class="optional-selects" name="smoke">Dohányzás megengedett</mat-checkbox>
+        </section>
       </form>
     </div>
     <div *ngIf="currentStep===4" class="step">
-      <form [formGroup]="imageForm" class="form-group">
+      <form [formGroup]="imageForm" class="form-group" enctype="multipart/form-data">
       <mat-form-field appearance="outline">
         <mat-label>Leírás</mat-label>
         <input matInput type="textarea" class="long-input" formControlName="description">
       </mat-form-field>
       <div>
         <button mat-button (click)="filePicker.click()" type="button">Képek feltöltése</button>
-        <input  #filePicker class="hidden" type="file" (change)="onImagePicked($event)">
+        <input  #filePicker class="hidden" name="image" type="file" (change)="onImagePicked($event)">
       </div>
       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && imageForm.get('image').valid">
         <img [src]="imagePreview">

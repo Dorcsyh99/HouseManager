@@ -28,6 +28,13 @@ export class PropertyUploadComponent implements OnInit {
     datasForm: FormGroup;
     optionalForm: FormGroup;
     imageForm: FormGroup;
+    furnitured: boolean;
+    pet: boolean;
+    garden: boolean;
+    smoke: boolean;
+    attic: boolean;
+    elevator: boolean;
+
 
     constructor(
       public propertyService: PropertyService,
@@ -36,7 +43,7 @@ export class PropertyUploadComponent implements OnInit {
 
     ngOnInit() {
       this.typeForm = new FormGroup({
-        type: new FormControl("elado")
+        type: new FormControl(null)
       })
       this.addressForm = new FormGroup({
         city: new FormControl(null, {
@@ -103,6 +110,36 @@ export class PropertyUploadComponent implements OnInit {
               image: propData.image,
               creator: propData.creator
             };
+            this.typeForm.setValue({
+              type: this.prop.type
+            });
+            this.addressForm.setValue({
+              city: this.prop.city,
+              city2: this.prop.city2,
+              address: this.prop.address,
+            });
+            this.datasForm.setValue({
+              size: this.prop.size,
+              price: this.prop.price,
+              condition: this.prop.condition,
+              numberOfRooms: this.prop.numberOfRooms,
+              year: this.prop.year,
+              heatingType: this.prop.heatingType
+            });
+            this.optionalForm.setValue({
+              level: this.prop.level,
+              parking: this.prop.parking,
+              furnitured: this.prop.furnitured,
+              attic: this.prop.attic,
+              garden: this.prop.garden,
+              pet: this.prop.pet,
+              smoke: this.prop.smoke,
+              elevator: this.prop.elevator
+            });
+            this.imageForm.setValue({
+              image: this.prop.image,
+              description: this.prop.description
+            });
           });
           console.log(this.prop);
         } else {
@@ -131,6 +168,15 @@ export class PropertyUploadComponent implements OnInit {
         this.stepNext();
       }
     }
+
+    checkboxTest(formField){
+      if formField.checked {
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     onImagePicked(event: Event) {
       const file = (event.target as HTMLInputElement).files[0];
       this.imageForm.patchValue({ image: file });
@@ -144,11 +190,23 @@ export class PropertyUploadComponent implements OnInit {
     }
 
     onSaveProperty() {
-      if (this.typeForm.invalid || this.addressForm.invalid || this.datasForm.invalid || this.optionalForm.invalid || this.imageForm.invalid ) {
+      if (this.addressForm.invalid) {
         console.log("invalid form");
       }
       console.log("Not invalid");
       this.isLoading = true;
+      let pet;
+      let smoke;
+      let garden;
+      let attic;
+      let furnitured;
+      let elevator;
+      pet = checkboxTest(this.optionalForm.value.pet);
+      smoke.checkboxTest(this.optionalForm.value.smoke);
+      garden.checkboxTest(this.optionalForm.value.garden);
+      attic.checkboxTest(this.optionalForm.value.attic);
+      furnitured.checkboxTest(this.optionalForm.value.furnitured);
+      elevator.checkboxTest(this.optionalForm.value.elevator);
       if (this.mode === "create") {
         console.log("entered here");
         this.propertyService.addProp(
@@ -158,20 +216,20 @@ export class PropertyUploadComponent implements OnInit {
           this.addressForm.value.address,
           this.datasForm.value.size,
           this.datasForm.value.price,
-          this.datasForm.value.numberOfRooms,
           this.datasForm.value.condition,
           this.datasForm.value.year,
-          this.datasForm.value.heatingType,
-          this.optionalForm.value.level,
+          this.datasForm.value.numberOfRooms,
           this.optionalForm.value.parking,
-          this.optionalForm.value.elevator,
-          this.optionalForm.value.garden,
-          this.optionalForm.value.attic,
-          this.optionalForm.value.pet,
-          this.optionalForm.value.smoke,
-          this.optionalForm.value.furnitured,
+          furnitured,
+          garden,
+          attic,
+          pet,
+          smoke,
+          this.datasForm.value.heatingType,
+          elevator,
+          this.imageForm.value.description,
+          this.optionalForm.value.level,
           this.imageForm.value.image,
-          this.imageForm.value.description
         );
         console.log("after addprop");
       } else {

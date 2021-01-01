@@ -1,0 +1,64 @@
+.search-bar{
+  margin: 30px 10%;
+  .city-input{
+    width: 100%;
+    input{
+      text-transform: capitalize;
+    }
+  }
+}
+.left-side{
+  max-width: 75%;
+  .prop-card-container{
+    img{
+      max-width: 200px;
+      float: left;
+      margin-right: 20px;
+    }
+    margin: 60px 10%;
+    clear: both;
+    .prop-card{
+      min-height: 150px;
+      margin: 20px 0 20px 0;
+      padding: 30px 50px;
+      border: 2px outline black;
+      box-shadow: 2px 5px 12px grey;
+      button{
+        margin-top: 20px;
+        background-color: rgb(48, 119, 58);
+        float: right;
+        color: white;
+        transition: .2s ease-out all;
+        &:hover{
+          color: rgb(48, 119, 58);
+          background-color: white;
+          border: .5px solid rgb(48, 119, 58);
+        }
+      }
+      .card-text{
+        p{
+          margin-bottom: 15px;
+        }
+        p:first-child{
+          font-size: 20px;
+          font-weight: bold;
+          line-height: 23px;
+        }
+        p:nth-child(2){
+          font-size: 18px;
+        }
+        ul{
+          margin-left: 10px;
+          margin-bottom: 20px;
+          margin-top: 20px;
+          color: rgb(48, 119, 58);
+          li{
+            float: left;
+            margin: 0 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
